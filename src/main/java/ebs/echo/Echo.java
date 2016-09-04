@@ -11,7 +11,7 @@ public class Echo {
     @Path("{param}")
     public Response getMsg(@PathParam("param") String msg) {
         String output = "AFTP: " + msg;
-        return Response.status(200).entity(output).build();
+        return Response.status(200).entity(output).build()
    }
 	
 	
