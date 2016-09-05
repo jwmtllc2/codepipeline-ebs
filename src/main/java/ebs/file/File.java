@@ -102,13 +102,19 @@ public class File {
 			return ls("");
 		}
 
-		String output = "<br><br>USAGE:<br>";
+		
 
 		String base = request.getRequestURL().substring(0,
 				request.getRequestURL().length() - request.getRequestURI().length());
 
+		String output = "<br><br>USAGE:<br>";
+		output += "<br><br><h1>" + base + "</h1><br><br>";
+		output += "<h3>";
 		output += "<br>" + base + "/ls";
 		output += "<br>" + base + "/cat/file_name";
+		output += "</h3>";
+		
+		
 
 		return Response.status(200).entity(output).build();
 	}
