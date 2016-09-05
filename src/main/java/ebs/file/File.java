@@ -2,6 +2,7 @@ package ebs.file;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,9 +34,9 @@ public class File {
 	HttpServletRequest request;
 
 	@GET
-	@Path("ls/{param}")
-	public Response ls(@PathParam("param") String msg) {
-		String output = "Jersey file/ls : " + msg;
+	@Path("ls")
+	public Response ls() {
+		String output = "Directory listing:";
 
 		AmazonS3 s3Client = AmazonS3ClientBuilder.standard().withCredentials(new DefaultAWSCredentialsProviderChain())
 				.build();
@@ -55,6 +56,17 @@ public class File {
 
 		return Response.status(200).entity(result).build();
 	}
+	
+	@GET
+	@Path("dir")
+	public Response dir() {
+		return ls();
+	}
+	
+	
+	
+	
+	
 
 	@GET
 	@Path("cat/{param}")
@@ -98,10 +110,16 @@ public class File {
 	@Path("{param}")
 	public Response usage(@PathParam("param") String msg) {
 
-		if (msg.equals("ls")) {
-			return ls("");
-		}
+//		if (msg.equals("ls")) {
+//			return ls("");
+//		}
 
+		String hostInfo = "";
+		try {
+			hostInfo = InetAddress.getLocalHost().getHostName() + " - " + InetAddress.getLocalHost().getHostAddress();
+		} catch (Exception e){
+			e.printStackTrace();
+		}
 		
 
 		String base = request.getRequestURL().substring(0,
@@ -112,6 +130,7 @@ public class File {
 		output += "<h3>";
 		output += "<br>" + base + "/ls";
 		output += "<br>" + base + "/cat/file_name";
+		output += "<br><br><i>HOST:" + hostInfo + "</i>";
 		output += "</h3>";
 		
 		
