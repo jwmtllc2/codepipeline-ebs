@@ -57,11 +57,11 @@ public class File {
 		return Response.status(200).entity(result).build();
 	}
 	
-	@GET
-	@Path("dir")
-	public Response dir() {
-		return ls();
-	}
+//	@GET
+//	@Path("dir")
+//	public Response dir() {
+//		return ls();
+//	}
 	
 	
 	
@@ -116,7 +116,7 @@ public class File {
 
 		String hostInfo = "";
 		try {
-			hostInfo = InetAddress.getLocalHost().getHostName() + " - " + InetAddress.getLocalHost().getHostAddress();
+			hostInfo = InetAddress.getLocalHost().getCanonicalHostName() + " - " + InetAddress.getLocalHost().getHostAddress();
 		} catch (Exception e){
 			e.printStackTrace();
 		}
@@ -130,7 +130,7 @@ public class File {
 		output += "<h3>";
 		output += "<br>" + base + "/ls";
 		output += "<br>" + base + "/cat/file_name";
-		output += "<br><br><i>HOST:" + hostInfo + "</i>";
+		output += "<br><br><i>HOST:  " + hostInfo + "</i>";
 		output += "</h3>";
 		
 		
