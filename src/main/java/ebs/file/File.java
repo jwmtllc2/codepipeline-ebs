@@ -57,11 +57,11 @@ public class File {
 		return Response.status(200).entity(result).build();
 	}
 	
-	@GET
-	@Path("dir")
-	public Response dir() {
-		return ls();
-	}
+//	@GET
+//	@Path("dir")
+//	public Response dir() {
+//		return ls();
+//	}
 	
 	
 	
